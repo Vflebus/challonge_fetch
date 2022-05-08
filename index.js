@@ -52,5 +52,8 @@ const fetch_challonge = async (tournoi) => {
             matchs: matchs
         };
     });
-    return participants;
+    return {
+        tournamentName: tournoi,
+        participants
+    };
 }
