@@ -36,7 +36,9 @@ const fetch_challonge = async (tournoi) => {
             const newMatch = {
                 round: match.match.round > 0 ? `Winner round ${Math.abs(match.match.round)}` : `Loser round ${Math.abs(match.match.round)}`,
                 player1: allParticipants.filter(participant => participant.participant.id == match.match.player1_id)[0].participant.display_name,
+                player1Img: allParticipants.filter(participant => participant.participant.id == match.match.player1_id)[0].participant.attached_participatable_portrait_url,
                 player2: allParticipants.filter(participant => participant.participant.id == match.match.player2_id)[0].participant.display_name,
+                player2Img: allParticipants.filter(participant => participant.participant.id == match.match.player2_id)[0].participant.attached_participatable_portrait_url,
                 winner: allParticipants.filter(participant => participant.participant.id == match.match.winner_id)[0].participant.display_name,
                 score: match.match.scores_csv
             };
