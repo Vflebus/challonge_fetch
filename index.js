@@ -9,7 +9,7 @@ const api =  axios.create({
 })
 
 const app = express();
-const port = 1213;
+const port = process.env.PORT || 1213;
 
 app.use(cors({
     origin: '*'
