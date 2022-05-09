@@ -22,7 +22,7 @@ app.get("/:url", async (request, response) => {
         const participants = await fetch_challonge(request.params.url)
         response.json(participants);
     } catch (error) {
-        console.error(error);
+        console.error(error.status);
         response.status(500).json(error.message);
     }
 })
@@ -54,6 +54,7 @@ const fetch_challonge = async (tournoi) => {
             nom: participant.participant.display_name,
             seed: participant.participant.seed,
             classement_final: participant.participant.final_rank ? participant.participant.final_rank : "Tournoi non complété",
+            img: participant.participant.attached_participatable_portrait_url,
             matchs: matchs
         };
     });
