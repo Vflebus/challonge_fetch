@@ -17,14 +17,17 @@ app.use(cors({
 
 app.listen(port, () => console.log(`listenning to port ${port}`));
 
-app.get("/", async (request, response) => {
-    const participants = await fetch_challonge('CPUS4W9')
+app.get("/:url", async (request, response) => {
+    const participants = await fetch_challonge(request.params.url)
     response.json(participants);
 })
 
 const fetch_challonge = async (tournoi) => {
     const participantsData = await api.get(`/tournaments/${tournoi}/participants.json?api_key=HgoEi7lekbPyhvOqFeSki4yurW7dpN5LF4Wqk0hb`);
     const allParticipants = participantsData.data;
+    if (participantsData.errors) {
+        return data.errors;
+    }
     const matchsData = await api.get(`/tournaments/${tournoi}/matches.json?api_key=HgoEi7lekbPyhvOqFeSki4yurW7dpN5LF4Wqk0hb`);
     const allMatchs = matchsData.data;
 
