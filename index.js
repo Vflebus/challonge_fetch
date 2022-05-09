@@ -58,11 +58,7 @@ const fetch_challonge = async (tournoi) => {
             matchs: matchs
         };
     });
-    const season = tournoi.split(/[SWsw]/)[1];
-    const week = tournoi.split(/[SWsw]/)[2];
-    return {
-        season,
-        week,
-        participants,
-    };
+    // const season = tournoi.split(/[SWsw]/)[1];
+    // const week = tournoi.split(/[SWsw]/)[2];
+    return participants;
 }
