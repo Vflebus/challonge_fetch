@@ -45,6 +45,7 @@ const fetch_challonge = async (tournoi) => {
                 player2: allParticipants.filter(participant => participant.participant.id == match.match.player2_id)[0].participant.display_name,
                 player2Img: allParticipants.filter(participant => participant.participant.id == match.match.player2_id)[0].participant.attached_participatable_portrait_url,
                 winner: allParticipants.filter(participant => participant.participant.id == match.match.winner_id)[0].participant.display_name,
+                hasWon: match.match.winner_id == participant.participant.id ? true : false,
                 score: match.match.scores_csv,
                 id: match.match.id
             };
