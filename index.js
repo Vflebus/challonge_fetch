@@ -65,10 +65,12 @@ const fetch_challonge = async (tournoi) => {
             classement_final: participant.participant.final_rank ? participant.participant.final_rank : "Tournoi non complété",
             img: participant.participant.attached_participatable_portrait_url,
             matchs: matchs,
-            date: dateObject
         };
     });
     // const season = tournoi.split(/[SWsw]/)[1];
     // const week = tournoi.split(/[SWsw]/)[2];
-    return participants;
+    return {
+        date: dateObject,
+        participants
+    };
 }
