@@ -1,8 +1,7 @@
 const express = require('express');
 const axios = require('axios');
-const dotenv = require('dotenv');
+require('dotenv').config;
 const cors =  require('cors');
-
 
 const api =  axios.create({
     baseURL: 'https://api.challonge.com/v1/'
@@ -32,6 +31,15 @@ const fetch_challonge = async (tournoi) => {
     const allParticipants = participantsData.data;
     const matchsData = await api.get(`/tournaments/${tournoi}/matches.json?api_key=HgoEi7lekbPyhvOqFeSki4yurW7dpN5LF4Wqk0hb`);
     const allMatchs = matchsData.data;
+    const tournament = await api.get(`/tournaments/${tournoi}.json?api_key=HgoEi7lekbPyhvOqFeSki4yurW7dpN5LF4Wqk0hb`);
+    const date = tournament.data.tournament.start_at.slice(0, 10);
+    const dateArray = date.split("-");
+    const dateObject = {
+        year: dateArray[0],
+        month: dateArray[1],
+        day: dateArray[2]
+    };
+    console.log(dateObject);
 
     const participants = allParticipants.map(participant => {
         const matchsData = allMatchs.filter(match => {
@@ -56,7 +64,8 @@ const fetch_challonge = async (tournoi) => {
             seed: participant.participant.seed,
             classement_final: participant.participant.final_rank ? participant.participant.final_rank : "Tournoi non complété",
             img: participant.participant.attached_participatable_portrait_url,
-            matchs: matchs
+            matchs: matchs,
+            date: dateObject
         };
     });
     // const season = tournoi.split(/[SWsw]/)[1];
